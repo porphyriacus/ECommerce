@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,16 +14,16 @@ namespace ECommerce.Domain.Entities
         public Product Product { get; private set; }
 
         public int Count { get; private set; }
-        public double Price { get; private set; }
+        public Money Price { get; private set; }
 
         protected CartItem() { }
-        public CartItem(Guid cartId,Guid productId, int count, double price)
+        public CartItem(Guid cartId,Guid productId, int count, Money price)
         {
             if (cartId == Guid.Empty)
                 throw new ArgumentException("CartItem can not exist without Cart");
             if (productId == Guid.Empty)
                 throw new ArgumentException("CartItem can not exist without Product");
-            if (price < 0)
+            if (price.Amount < 0)
                 throw new ArgumentException("Price can not be lower then 0");
 
             CartId = cartId;
@@ -37,9 +38,9 @@ namespace ECommerce.Domain.Entities
         }
         public void DecrementCount() { Count--; }
 
-        public void UpdatePrice(double price)
+        public void UpdatePrice(Money price)
         {
-            if (price < 0)
+            if (price.Amount < 0)
                 throw new ArgumentException("Price can not be lower then 0");
             Price = price;
         }

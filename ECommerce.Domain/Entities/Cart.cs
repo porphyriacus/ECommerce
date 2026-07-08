@@ -6,7 +6,7 @@ namespace ECommerce.Domain.Entities
 {
     public class Cart : Entity
     {
-        public Guid Userid { get; private set; }
+        public Guid UserId { get; private set; }
         public User User { get; private set; }
         public ICollection<CartItem> CartItems { get; private set; } = new List<CartItem>();
 
@@ -15,7 +15,20 @@ namespace ECommerce.Domain.Entities
         {
             if (userid == Guid.Empty)
                 throw new ArgumentException("Cart can not exist without User");
-            Userid = userid;
+            UserId = userid;
         }
+
+
+        /*
+            AddItem(Product product, int quantity)
+
+            RemoveItem(Guid cartItemId)
+
+            UpdateQuantity(Guid cartItemId, int newQuantity)
+
+            Clear()
+
+           Money CalculateTotal() 
+         */
     }
 }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ECommerce.Domain.Exceptions
 {
-    internal class DomainException
+    public class DomainException : Exception
     {
+        public DomainException(string message) : base(message) { }
     }
 }

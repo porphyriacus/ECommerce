@@ -1,4 +1,5 @@
-﻿using ECommerce.Domain.ValueObjects;
+﻿using ECommerce.Domain.Exceptions;
+using ECommerce.Domain.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace ECommerce.Domain.Entities
         public Address? ShippingAddress { get; private set; }
 
         public Cart Cart { get; private set; }
+
         public ICollection<Order> Orders { get; private set; } = new List<Order>();
         public ICollection<Review> Reviews { get; private set; } = new List<Review>();
 
@@ -24,7 +26,13 @@ namespace ECommerce.Domain.Entities
             LastName = lastName;
             CreatedAt = DateTime.UtcNow;
             ShippingAddress = shippingAddress;
-            Cart = new Cart();
+        }
+
+        public void AttachCart(Cart cart)
+        {
+            if (cart.UserId != Id)
+                throw new DomainException("Cart belongs to another user");
+            Cart = cart;
         }
     }
 }

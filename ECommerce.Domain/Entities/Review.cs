@@ -17,13 +17,15 @@ namespace ECommerce.Domain.Entities
 
         public string Comment { get; private set; }
 
+        private int _rating;
         public int Rating
         {
-            get; private set
+            get => _rating;
+            private set
             {
                 if (value < 0 || value > 5)
                     throw new ArgumentException("Rating should be in range of 0 to 5");
-                field = value;
+                _rating = value;
             }
         }
 

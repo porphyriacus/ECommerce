@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,10 +14,10 @@ namespace ECommerce.Domain.Entities
         public Product Product { get; private set; }
 
         public int Quantity { get; private set; }
-        public double Price { get; private set; }
+        public Money Price { get; private set; }
 
         protected OrderItem() { }
-        public OrderItem(Guid orderId, Guid productId, int quantity, double price)
+        public OrderItem(Guid orderId, Guid productId, int quantity, Money price)
         {
             if (orderId == Guid.Empty)
                 throw new ArgumentException("OrderItem can not exist without Order");

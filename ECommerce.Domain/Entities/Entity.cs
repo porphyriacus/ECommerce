@@ -7,14 +7,22 @@ namespace ECommerce.Domain.Entities
     public abstract class Entity
     {
         public Guid Id { get; protected set; }
-
-        protected Entity()
-        {
-            Id = Guid.NewGuid();
-        }
         public Entity()
         {
             Id = Guid.NewGuid();
+        }
+
+        private readonly List<object> _domainEvents = new(); 
+        public IReadOnlyCollection<object> DomainEvents => _domainEvents.AsReadOnly();
+
+        protected void AddDomainEvent(object domainEvent)
+        {
+            _domainEvents.Add(domainEvent);
+        }
+
+        public void ClearDomainEvents()
+        {
+            _domainEvents.Clear();
         }
     }
 }

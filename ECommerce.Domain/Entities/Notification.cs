@@ -25,5 +25,10 @@ namespace ECommerce.Domain.Entities
             NotificationType = notificationType;
             Message = message;
         }
+
+        public void MarkAsSent()
+        {
+            IsSent = true;
+        }
     }
 }
