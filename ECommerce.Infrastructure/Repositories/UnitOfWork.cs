@@ -16,7 +16,26 @@ namespace ECommerce.Infrastructure.Repositories
 
         public UnitOfWork(AppDbContext context) { 
             _context = context;
+            Products = new EfSoftDeleteRepository<Product>(_context);
+
+            Orders = new EfRepository<Order>(_context);
+            Carts = new EfRepository<Cart>(_context);
+            Categories = new EfRepository<Category>(_context);
+            Notifications = new EfRepository<Notification>(_context);
+            Payments = new EfRepository<Payment>(_context);
+            Reviews = new EfRepository<Review>(_context);
         }
+
+        public ISoftDeleteRepository<Product> Products { get; }
+
+        public IRepository<Order> Orders { get; }
+        public IRepository<Cart> Carts { get; }
+        public IRepository<Category> Categories { get; }
+        public IRepository<Notification> Notifications { get; }
+        public IRepository<Payment> Payments { get; }
+        public IRepository<Review> Reviews { get; }
+
+
 
         public async Task BeginTransactionAsync(CancellationToken cancellationToken)
         {

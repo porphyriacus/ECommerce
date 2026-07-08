@@ -5,9 +5,10 @@ using System.Text;
 
 namespace ECommerce.Domain.Interfaces
 {
-    public interface ISoftDeleteRepository<T> : IRepository<T> where T : Entity
+    public interface ISoftDeleteRepository<T> : IRepository<T> where T : Product
     {
-        Task<T> RestoreAsync(T entity, CancellationToken cancellationToken = default);
+        Task RestoreAsync(T entity, CancellationToken cancellationToken = default);
 
+        Task SoftDeleteAsync(T entity, CancellationToken cancellationToken = default);
     }
 }

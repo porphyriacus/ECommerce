@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ECommerce.Domain.Entities
 {
-    public class Product : Entity
+    public class Product : Deletable
     {
         public string Name { get; private set; }
         public string? Description { get; private set; }
@@ -20,9 +20,7 @@ namespace ECommerce.Domain.Entities
 
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
         
-        public bool IsDeleted { get; private set; } = false;
-        public DateTime? DeletedAt { get; private set; }
-
+      
 
         public ICollection<Review> Reviews { get; private set; } = new List<Review>();
 
@@ -39,16 +37,5 @@ namespace ECommerce.Domain.Entities
 
         }
 
-        public void Delete()
-        {
-            IsDeleted = true;
-            DeletedAt = DateTime.UtcNow;
-        }
-
-        public void Restore()
-        {
-            IsDeleted = false;
-            DeletedAt = null;
-        }
     }
 }
