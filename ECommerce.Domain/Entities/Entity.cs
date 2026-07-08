@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.Domain.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,10 +13,10 @@ namespace ECommerce.Domain.Entities
             Id = Guid.NewGuid();
         }
 
-        private readonly List<object> _domainEvents = new(); 
-        public IReadOnlyCollection<object> DomainEvents => _domainEvents.AsReadOnly();
+        private readonly List<IDomainEvent> _domainEvents = new(); 
+        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        protected void AddDomainEvent(object domainEvent)
+        protected void AddDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);
         }
