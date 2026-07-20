@@ -118,6 +118,8 @@ namespace ECommerce.Infrastructure.Data
                     .HasIndex(p => p.Name);
                 product
                     .HasIndex(p => p.CategoryId);
+                product
+                    .HasQueryFilter(p => !p.IsDeleted);
 
             });
 

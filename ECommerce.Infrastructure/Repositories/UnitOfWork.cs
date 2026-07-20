@@ -12,7 +12,7 @@ namespace ECommerce.Infrastructure.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
-        private IDbContextTransaction _transaction;
+        private IDbContextTransaction? _transaction;
 
         public UnitOfWork(AppDbContext context) { 
             _context = context;

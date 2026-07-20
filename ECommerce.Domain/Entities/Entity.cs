@@ -26,4 +26,21 @@ namespace ECommerce.Domain.Entities
             _domainEvents.Clear();
         }
     }
+    public abstract class Deletable : Entity
+    {
+        public bool IsDeleted { get; private set; } = false;
+        public DateTime? DeletedAt { get; private set; }
+
+        public void Delete()
+        {
+            IsDeleted = true;
+            DeletedAt = DateTime.UtcNow;
+        }
+
+        public void Restore()
+        {
+            IsDeleted = false;
+            DeletedAt = null;
+        }
+    }
 }

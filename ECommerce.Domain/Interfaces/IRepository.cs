@@ -8,117 +8,68 @@ namespace ECommerce.Domain.Interfaces
 {
     public interface IRepository<T> where T : Entity
     {
-        protected readonly DbSet<T> _entities;
-        protected readonly AppDbContext _context;
-
-        public EfRepository(AppDbContext context)
-        {
-            _context = context;
-            _entities = _context.Set<T>();
-        }
-
-
-        public async Task<T?> GetByIdAsync(int id,
+        /// <summary>
+        /// Поиск сущности по Id
+        /// </summary>
+        /// <param name="id">Id сущности</param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="includesProperties">Делегаты для подключения навигационных свойств</param>
+        /// <returns></returns>
+        Task<T?> GetByIdAsync(Guid id,
          CancellationToken cancellationToken = default,
-         params Expression<Func<T, object>>[]? includesProperties)
-        {
-            IQueryable<T> query = _entities.AsQueryable();
-
-            if (includesProperties != null && includesProperties.Any())
-            {
-                foreach (Expression<Func<T, object>>? include in includesProperties)
-                {
-                    query = query.Include(include);
-                }
-            }
-
-            return await query.FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
-        }
-
-
-        public async Task<IReadOnlyList<T>> ListAllAsync(
-            CancellationToken cancellationToken = default)
-        {
-            return await _entities.ToListAsync(cancellationToken);
-        }
+         params Expression<Func<T, object>>[]? includesProperties);
 
         /// <summary>
-        /// TODO сделать список фильтров пока костыльный etQueryable() неприятно   нужно только для тренировок по сути
+        /// Получение всего списка сущностей
         /// </summary>
-        /// <param name="filter"></param>
-        /// <param name="orderBy"></param>
         /// <param name="cancellationToken"></param>
-        /// <param name="includesProperties"></param>
         /// <returns></returns>
-        public async Task<IReadOnlyList<T>> ListAsync(
+        Task<IReadOnlyList<T>> ListAllAsync(
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Получение отфильтрованного списка
+        /// </summary>
+        /// <param name="filter">Делегат-условие отбора</param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="includesProperties">Делегаты для подключения навигационных свойств</param>
+        /// <returns></returns>
+        Task<IReadOnlyList<T>> ListAsync(
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy,
-            List<Expression<Func<T, bool>>>? filters = null,
+            List<Expression<Func<T, bool>>>? filters,
             CancellationToken cancellationToken = default,
-            params Expression<Func<T, object>>[]? includesProperties)
-        {
-            IQueryable<T> query = _entities.AsQueryable();
+            params Expression<Func<T, object>>[]? includesProperties);
 
-            if (filters != null)
-            {
-                foreach (var filter in filters)
-                {
-                    if (filter != null)
-                    {
-                        query = query.Where(filter);
-                    }
-                }
-            }
+        /// </summary>
+        /// Добавление новой сущности
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task AddAsync(T entity,
+         CancellationToken cancellationToken = default);
 
-            if (includesProperties != null && includesProperties.Any())
-            {
-                foreach (var include in includesProperties)
-                    query = query.Include(include);
-            }
 
-            if (orderBy != null)
-                query = orderBy(query);
-            else
-                query = query.OrderBy(e => e.Id);
+        // <summary>
+        /// Удаление сущности
+        /// </summary>
+        /// <param name="entity">Сущность, которую следует удалить</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task DeleteAsync(T entity,
+         CancellationToken cancellationToken = default);
 
-            return await query.ToListAsync(cancellationToken);
-        }
-        public async Task<T?> FirstOrDefaultAsync(
+        /// <summary>
+        /// Поиск первой сущности, удовлетворяющей условию отбора.
+        /// Если сущность не найдена, будет возвращено значение по умолчанию
+        /// </summary>
+        /// <param name="filter">Делегат-условие отбора</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<T?> FirstOrDefaultAsync(
          Expression<Func<T, bool>> filter,
-         CancellationToken cancellationToken = default)
-        {
-            IQueryable<T> query = _entities.AsQueryable();
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-            return await query.FirstOrDefaultAsync(cancellationToken);
-        }
-        public async Task AddAsync(T entity,
-         CancellationToken cancellationToken = default)
-        {
-            await _entities.AddAsync(entity, cancellationToken);
-        }
+         CancellationToken cancellationToken = default);
 
 
-        public async Task UpdateAsync(T entity,
-         CancellationToken cancellationToken = default)
-        {
-            var existing = await _entities.FindAsync(entity.Id, cancellationToken);
-            if (existing == null)
-            {
-                throw new InvalidOperationException($"Entity {typeof(T).Name} with id {entity.Id} not found");
-            }
-            _context.Entry(existing).CurrentValues.SetValues(entity);
-        }
-
-
-        public Task DeleteAsync(T entity,
-         CancellationToken cancellationToken = default)
-        {
-            _context.Entry(entity).State = EntityState.Deleted;
-            return Task.CompletedTask;
-
-        }
-
-
+    }
+}

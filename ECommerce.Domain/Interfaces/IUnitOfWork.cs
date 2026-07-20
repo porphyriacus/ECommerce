@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommerce.Domain.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,9 @@ namespace ECommerce.Domain.Interfaces
         public Task CommitTransactionAsync(CancellationToken cancellationToken);
         public Task RollbackTransactionAsync(CancellationToken cancellationToken);
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+        public IReadOnlyCollection<IDomainEvent> GetDomainEvents();
+        public void ClearDomainEvents();
 
     }
 }
