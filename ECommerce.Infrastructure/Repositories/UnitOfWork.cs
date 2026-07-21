@@ -43,15 +43,23 @@ namespace ECommerce.Infrastructure.Repositories
         }
         public async Task CommitTransactionAsync(CancellationToken cancellationToken)
         {
-            await _transaction.CommitAsync(cancellationToken);
-            await _transaction.DisposeAsync();
+            if(_transaction != null)
+            {
+                await _transaction.CommitAsync(cancellationToken);
+                await _transaction.DisposeAsync();
+            }
+
             _transaction = null;
 
         }
         public async Task RollbackTransactionAsync(CancellationToken cancellationToken)
         {
-            await _transaction.RollbackAsync(cancellationToken);
-            await _transaction.DisposeAsync();
+            if (_transaction != null)
+            {
+                await _transaction.RollbackAsync(cancellationToken);
+                await _transaction.DisposeAsync();
+            }
+
             _transaction = null;
         }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)

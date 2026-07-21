@@ -15,14 +15,12 @@ namespace ECommerce.Infrastructure.Repositories
         public async Task RestoreAsync(T entity, CancellationToken cancellationToken = default)
         {
             entity.Restore();
-            await UpdateAsync(entity, cancellationToken);
         }
 
         public async Task SoftDeleteAsync(T entity,
          CancellationToken cancellationToken = default)
         {
             entity.Delete();
-            await UpdateAsync(entity, cancellationToken);
         }
     }
 }
