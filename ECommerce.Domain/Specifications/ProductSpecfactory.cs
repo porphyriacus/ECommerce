@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerce.Domain.Common
+namespace ECommerce.Domain.Specifications
 {
-    internal class Specifications
+    internal class ProductSpecfactory
     {
     }
 }
