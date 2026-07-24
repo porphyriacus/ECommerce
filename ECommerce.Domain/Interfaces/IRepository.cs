@@ -27,19 +27,6 @@ namespace ECommerce.Domain.Interfaces
         Task<IReadOnlyList<T>> ListAllAsync(
             CancellationToken cancellationToken = default);
 
-        /// <summary>
-        /// Получение отфильтрованного списка
-        /// </summary>
-        /// <param name="filter">Делегат-условие отбора</param>
-        /// <param name="cancellationToken"></param>
-        /// <param name="includesProperties">Делегаты для подключения навигационных свойств</param>
-        /// <returns></returns>
-        Task<IReadOnlyList<T>> ListAsync(
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy,
-            List<Expression<Func<T, bool>>>? filters,
-            CancellationToken cancellationToken = default,
-            params Expression<Func<T, object>>[]? includesProperties);
-
         /// </summary>
         /// Добавление новой сущности
         /// </summary>
@@ -58,18 +45,6 @@ namespace ECommerce.Domain.Interfaces
         /// <returns></returns>
         Task DeleteAsync(T entity,
          CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Поиск первой сущности, удовлетворяющей условию отбора.
-        /// Если сущность не найдена, будет возвращено значение по умолчанию
-        /// </summary>
-        /// <param name="filter">Делегат-условие отбора</param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<T?> FirstOrDefaultAsync(
-         Expression<Func<T, bool>> filter,
-         CancellationToken cancellationToken = default);
-
 
     }
 }
