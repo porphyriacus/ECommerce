@@ -1,7 +1,8 @@
-﻿using ECommerce.Domain.Events;
+﻿using ECommerce.Domain.Events.ProductEvents;
 using ECommerce.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ECommerce.Domain.Entities
@@ -48,5 +49,25 @@ namespace ECommerce.Domain.Entities
             return product;
         }
 
+        public void ChangeDescription(string description)
+        {
+            Description = description;
+        }
+
+        public void ChangePrice(Money money)
+        {
+            Price = money;
+            AddDomainEvent(new ProductChangedPriceEvent(Id, Name, money));
+        }
+        s
+        public void ChangeQuantity(int quantity)
+        {
+            StockQuantity = quantity;
+        }
+
+        public void ChangeName(string name)
+        {
+            Name = name;
+        }
     }
 }

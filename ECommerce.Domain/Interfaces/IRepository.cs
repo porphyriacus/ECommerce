@@ -1,4 +1,5 @@
-﻿using ECommerce.Domain.Entities;
+﻿using Ardalis.Specification;
+using ECommerce.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -45,6 +46,10 @@ namespace ECommerce.Domain.Interfaces
         /// <returns></returns>
         Task DeleteAsync(T entity,
          CancellationToken cancellationToken = default);
+
+        Task<T?> FirstOrDefaultAsync(ISpecification<T> specification, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<T>> ListAsync(ISpecification<T> specification, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(ISpecification<T> specification, CancellationToken cancellationToken = default);
 
     }
 }

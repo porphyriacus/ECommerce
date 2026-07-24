@@ -19,6 +19,16 @@ namespace ECommerce.Domain.Specifications
             return spec;
         }
 
+        public static Specification<Product> GetById(Guid id)
+        {
+            var spec = new Specification<Product>();
+            spec.Query.Where(p => p.Id == id);
+
+            spec.Query.Include(p => p.Category);
+            spec.Query.Include(p => p.Reviews);
+            return spec;
+        }
+
         public static Specification<Product> GetFiltered(
             string? searchTerm = null,
             Guid? categoryId = null,
