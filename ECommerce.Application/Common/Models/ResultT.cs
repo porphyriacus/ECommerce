@@ -1,9 +1,9 @@
-﻿using ECommerce.Application.Features.Common.Behaviors.Errors;
+﻿using ECommerce.Application.Common.Behaviors.Errors;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerce.Application.Features.Common.Models
+namespace ECommerce.Application.Common.Models
 {
     public class Result<T> : Result
     {

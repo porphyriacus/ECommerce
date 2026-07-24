@@ -13,6 +13,9 @@ namespace ECommerce.Domain.Specifications
         {
             var spec = new Specification<Product>();
             spec.Query.Where(p => p.Rating >= minRating);
+
+            spec.Query.Include(p => p.Category);
+            spec.Query.Include(p => p.Reviews);
             return spec;
         }
 

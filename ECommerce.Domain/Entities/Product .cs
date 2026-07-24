@@ -1,4 +1,5 @@
-﻿using ECommerce.Domain.ValueObjects;
+﻿using ECommerce.Domain.Events;
+using ECommerce.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,14 +19,14 @@ namespace ECommerce.Domain.Entities
 
         public double? Rating { get; private set; } = null;
 
-        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; private set; }
         
       
 
         public ICollection<Review> Reviews { get; private set; } = new List<Review>();
 
         protected Product() { }
-        public Product(string name, string? description, Money price, int stockQuantity, Guid categoryId)
+        private Product(string name, string? description, Money price, int stockQuantity, Guid categoryId)
         {
             Name = name;
             Description = description;
@@ -35,6 +36,16 @@ namespace ECommerce.Domain.Entities
 
             CategoryId = categoryId;
 
+            CreatedAt = DateTime.UtcNow;
+
+
+        }
+
+        public static Product Create(string name, string? description, Money price, int stockQuantity, Guid categoryId)
+        {
+            var product = new Product(name, description, price, stockQuantity, categoryId);
+            product.AddDomainEvent(new ProductCreatedEvent(product.Id, product.Name, product.Price, product.CategoryId, product.CreatedAt));
+            return product;
         }
 
     }
