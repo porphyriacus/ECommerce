@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
-using ECommerce.Application.Features.Product;
+using ECommerce.Application.Features.Products;
 using ECommerce.Domain.Entities;
 
 namespace ECommerce.Application.Common.Mapping

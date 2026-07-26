@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ECommerce.Application.Common.Models;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ECommerce.Application.Features.Products.Command.Delete
 {
-    internal class DeleteProductCommand
-    {
-    }
+    public sealed record DeleteProductCommand(Guid productId) : IRequest<Result>;
 }

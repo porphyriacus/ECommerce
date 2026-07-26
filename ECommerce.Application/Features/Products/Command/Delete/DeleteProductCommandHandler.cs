@@ -19,7 +19,7 @@ namespace ECommerce.Application.Features.Products.Command.Delete
             {
                 var product = await unitOfWork.Products.FirstOrDefaultAsync(ProductSpecfactory.GetById(request.productId), cancellation);
                 if (product == null)
-                    return Result.Failure(Error.Failure("DeleteProductCommand", $"Product with id {request.productId} nit found"));
+                    return Error.NotFound("DeleteProductCommand", $"Product with id {request.productId} nit found");
                 await unitOfWork.Products.DeleteAsync(product, cancellation);
                 await unitOfWork.SaveChangesAsync(cancellation);
 

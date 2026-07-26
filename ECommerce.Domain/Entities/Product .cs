@@ -59,7 +59,7 @@ namespace ECommerce.Domain.Entities
             Price = money;
             AddDomainEvent(new ProductChangedPriceEvent(Id, Name, money));
         }
-        s
+        
         public void ChangeQuantity(int quantity)
         {
             StockQuantity = quantity;

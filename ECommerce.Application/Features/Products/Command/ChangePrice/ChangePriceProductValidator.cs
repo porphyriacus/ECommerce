@@ -13,7 +13,7 @@ namespace ECommerce.Application.Features.Products.Command.ChangePrice
         public ChangePriceProductValidator()
         {
 
-            RuleFor(p => p.price.Amount)
+            RuleFor(p => p.money.Amount)
                  .GreaterThanOrEqualTo(0).WithMessage("Price can not be negative");
         }
     }

@@ -20,7 +20,7 @@ namespace ECommerce.Application.Features.Products.Command.ChangePrice
             {
                 var product = await unitOfWork.Products.FirstOrDefaultAsync(ProductSpecfactory.GetById(request.id), cancellation);
                 if (product == null)
-                    return Result.Failure(Error.Failure("ChangePriceProductCommand", $"Product with id {request.id} nit found"));
+                    return Error.NotFound("ChangePriceProductCommand", $"Product with id {request.id} nit found");
 
                 product.ChangePrice(request.money);
                 await unitOfWork.SaveChangesAsync(cancellation);

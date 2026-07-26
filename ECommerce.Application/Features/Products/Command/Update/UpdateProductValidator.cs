@@ -26,10 +26,6 @@ namespace ECommerce.Application.Features.Products.Command.Update
                  .GreaterThanOrEqualTo(0).WithMessage("Quantity can not be negative");
 
 
-            RuleFor(p => p.categoryId)
-               .NotEmpty().WithMessage("Category ID can not be empty")
-               .Must(id => id != Guid.Empty).WithMessage("Category ID must be a valid GUID");
-
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerce.Domain.Events
+namespace ECommerce.Domain.Events.ProductEvents
 {
     public class ProductCreatedEvent : DomainEvent
     {
