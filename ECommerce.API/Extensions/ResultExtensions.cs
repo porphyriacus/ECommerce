@@ -1,5 +1,5 @@
-﻿using ECommerce.Application.Features.Common.Behaviors.Errors;
-using ECommerce.Application.Features.Common.Models;
+﻿using ECommerce.Application.Common.Behaviors.Errors;
+using ECommerce.Application.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 

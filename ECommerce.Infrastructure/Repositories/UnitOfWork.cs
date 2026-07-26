@@ -3,9 +3,6 @@ using ECommerce.Domain.Events;
 using ECommerce.Domain.Interfaces;
 using ECommerce.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ECommerce.Infrastructure.Repositories
 {
@@ -46,7 +43,6 @@ namespace ECommerce.Infrastructure.Repositories
             if(_transaction != null)
             {
                 await _transaction.CommitAsync(cancellationToken);
-                await _transaction.DisposeAsync();
             }
 
             _transaction = null;

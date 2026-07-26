@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ECommerce.Application.Features.Common.Behaviors.Errors
+namespace ECommerce.Application.Common.Behaviors.Errors
 {
     public enum ErrorType
     {
@@ -11,6 +11,7 @@ namespace ECommerce.Application.Features.Common.Behaviors.Errors
         NotFound,      
         Validation,    
         Conflict,       
-        Unauthorized    
+        Unauthorized,
+
     }
 }

@@ -13,6 +13,19 @@ namespace ECommerce.Domain.Specifications
         {
             var spec = new Specification<Product>();
             spec.Query.Where(p => p.Rating >= minRating);
+
+            spec.Query.Include(p => p.Category);
+            spec.Query.Include(p => p.Reviews);
+            return spec;
+        }
+
+        public static Specification<Product> GetById(Guid id)
+        {
+            var spec = new Specification<Product>();
+            spec.Query.Where(p => p.Id == id);
+
+            spec.Query.Include(p => p.Category);
+            spec.Query.Include(p => p.Reviews);
             return spec;
         }
 
