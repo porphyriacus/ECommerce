@@ -1,5 +1,6 @@
 # ECommerce
 REST API для интернет-магазина, построенный на основе Clean Architecture, CQRS и Domain-Driven Design.
+Находится в стадии разработки.
 
 ## Технологии
 
