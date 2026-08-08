@@ -101,7 +101,7 @@ dotnet test --collect:"XPlat Code Coverage"
 
 ### Покрытие кода
 
-- Application Layer: ~70%
+- Application Layer: ~80%
 
 ## Реализованные функции
 
