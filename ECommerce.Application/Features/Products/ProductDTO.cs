@@ -17,7 +17,7 @@ namespace ECommerce.Application.Features.Products
         public int StockQuantity { get; set; }
 
         public string CategoryName { get; set; }
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public double? Rating { get; set; } = null;  // add getRating, getReviews later 
 
