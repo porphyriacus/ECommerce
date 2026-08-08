@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Specification" Version="9.3.1" />
+    <PackageReference Include="MediatR" Version="14.2.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="10.0.9" />
   </ItemGroup>
 

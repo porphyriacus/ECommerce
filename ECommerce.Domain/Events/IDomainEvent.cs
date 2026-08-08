@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ECommerce.Domain.Entities;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ECommerce.Domain.Events
 {
-    public interface IDomainEvent
-    {
-        DateTime OccurredOn { get; }
-    }
+    public interface IDomainEvent : INotification { }
+
     public abstract class DomainEvent : IDomainEvent
     {
         public DateTime OccurredOn { get; }
